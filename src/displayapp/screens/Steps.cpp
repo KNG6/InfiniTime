@@ -33,12 +33,12 @@ Steps::Steps(Pinetime::Applications::DisplayApp* app,
 
   lv_obj_t* lstepsL = lv_label_create(lv_scr_act(), nullptr);
   lv_obj_set_style_local_text_color(lstepsL, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0x111111));
-  lv_label_set_text_static(lstepsL, "Steps");
+  lv_label_set_text_static(lstepsL, "Pas");
   lv_obj_align(lstepsL, lSteps, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);
 
   lv_obj_t* lstepsGoal = lv_label_create(lv_scr_act(), nullptr);
   lv_obj_set_style_local_text_color(lstepsGoal, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_CYAN);
-  lv_label_set_text_fmt(lstepsGoal, "Goal\n%lu", settingsController.GetStepsGoal());
+  lv_label_set_text_fmt(lstepsGoal, "Objectif\n%lu", settingsController.GetStepsGoal());
   lv_label_set_align(lstepsGoal, LV_LABEL_ALIGN_CENTER);
   lv_obj_align(lstepsGoal, lSteps, LV_ALIGN_OUT_BOTTOM_MID, 0, 60);
 
