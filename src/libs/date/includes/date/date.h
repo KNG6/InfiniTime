@@ -4462,7 +4462,95 @@ get_units(std::ratio<1>)
 template <class CharT>
 CONSTCD11
 inline
-string_literal<CharT, 2>
+string_literal<CharT, 2>#include "displayapp/screens/Steps.h"
+2
+#include <lvgl/lvgl.h>
+3
+#include "displayapp/DisplayApp.h"
+4
+#include "displayapp/screens/Symbols.h"
+5
+​
+6
+using namespace Pinetime::Applications::Screens;
+7
+​
+8
+Steps::Steps(Pinetime::Applications::DisplayApp* app,
+9
+             Controllers::MotionController& motionController,
+10
+             Controllers::Settings& settingsController)
+11
+  : Screen(app), motionController {motionController}, settingsController {settingsController} {
+12
+​
+13
+  stepsArc = lv_arc_create(lv_scr_act(), nullptr);
+14
+​
+15
+  lv_obj_set_style_local_bg_opa(stepsArc, LV_ARC_PART_BG, LV_STATE_DEFAULT, LV_OPA_0);
+16
+  lv_obj_set_style_local_border_width(stepsArc, LV_ARC_PART_BG, LV_STATE_DEFAULT, 2);
+17
+  lv_obj_set_style_local_radius(stepsArc, LV_ARC_PART_BG, LV_STATE_DEFAULT, 0);
+18
+  lv_obj_set_style_local_line_color(stepsArc, LV_ARC_PART_INDIC, LV_STATE_DEFAULT, lv_color_hex(0x0000FF));
+19
+  lv_arc_set_end_angle(stepsArc, 200);
+20
+  lv_obj_set_size(stepsArc, 220, 220);
+21
+  lv_arc_set_range(stepsArc, 0, 500);
+22
+  lv_obj_align(stepsArc, nullptr, LV_ALIGN_CENTER, 0, 0);
+23
+​
+24
+  stepsCount = motionController.NbSteps();
+25
+​
+26
+  lv_arc_set_value(stepsArc, int16_t(500 * stepsCount / settingsController.GetStepsGoal()));
+27
+​
+28
+  lSteps = lv_label_create(lv_scr_act(), nullptr);
+29
+  lv_obj_set_style_local_text_color(lSteps, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0x00FF00));
+30
+  lv_obj_set_style_local_text_font(lSteps, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &jetbrains_mono_42);
+31
+  lv_label_set_text_fmt(lSteps, "%li", stepsCount);
+32
+  lv_obj_align(lSteps, nullptr, LV_ALIGN_CENTER, 0, -20);
+33
+​
+34
+  lv_obj_t* lstepsL = lv_label_create(lv_scr_act(), nullptr);
+35
+  lv_obj_set_style_local_text_color(lstepsL, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0x111111));
+36
+  lv_label_set_text_static(lstepsL, "Steps");
+37
+  lv_obj_align(lstepsL, lSteps, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);
+38
+​
+39
+  lv_obj_t* lstepsGoal = lv_label_create(lv_scr_act(), nullptr);
+40
+  lv_obj_set_style_local_text_color(lstepsGoal, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_CYAN);
+41
+  lv_label_set_text_fmt(lstepsGoal, "Goal\n%lu", settingsController.GetStepsGoal());
+42
+  lv_label_set_align(lstepsGoal, LV_LABEL_ALIGN_CENTER);
+43
+  lv_obj_align(lstepsGoal, lSteps, LV_ALIGN_OUT_BOTTOM_MID, 0, 60);
+44
+​
+45
+  lv_obj_t* backgroundLabel = lv_label_create(lv_scr_act(), nullptr);
 get_units(std::ratio<3600>)
 {
     return string_literal<CharT, 2>{'h'};
@@ -4628,20 +4716,20 @@ weekday_names()
 {
     static const std::string nm[] =
     {
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sun",
-        "Mon",
-        "Tue",
-        "Wed",
-        "Thu",
-        "Fri",
-        "Sat"
+        "Dimanche",
+        "Lundi",
+        "Mardi",
+        "Mercredi",
+        "Jeudi",
+        "Vendredi",
+        "Samedi",
+        "Dim",
+        "Lun",
+        "Mar",
+        "Mer",
+        "Jeu",
+        "Ven",
+        "Sam"
     };
     return std::make_pair(nm, nm+sizeof(nm)/sizeof(nm[0]));
 }
@@ -4652,26 +4740,26 @@ month_names()
 {
     static const std::string nm[] =
     {
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        "Janvier",
+        "Fevrier",
+        "Mars",
+        "Avril",
+        "Mai",
+        "Juin",
+        "Juillet",
+        "Aout",
+        "Septembre",
+        "Octobre",
+        "Novembre",
+        "Decembre",
         "Jan",
-        "Feb",
+        "Fev",
         "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
+        "Avr",
+        "Mai",
+        "Juin",
+        "Juil",
+        "Aou",
         "Sep",
         "Oct",
         "Nov",
