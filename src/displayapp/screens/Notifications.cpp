@@ -28,7 +28,7 @@ Notifications::Notifications(DisplayApp* app,
     validDisplay = true;
   } else {
     currentItem = std::make_unique<NotificationItem>("Notification",
-                                                     "No notification to display",
+                                                     "Pas de notifica-tion a afficher",
                                                      0,
                                                      notification.category,
                                                      notificationManager.NbNotifications(),
