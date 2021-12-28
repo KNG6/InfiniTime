@@ -36,10 +36,10 @@ bool Settings::OnTouchEvent(Pinetime::Applications::TouchEvents event) {
 std::unique_ptr<Screen> Settings::CreateScreen1() {
 
   std::array<Screens::List::Applications, 4> applications {{
-    {Symbols::sun, "Display", Apps::SettingDisplay},
-    {Symbols::eye, "Wake Up", Apps::SettingWakeUp},
-    {Symbols::clock, "Time format", Apps::SettingTimeFormat},
-    {Symbols::home, "Watch face", Apps::SettingWatchFace},
+    {Symbols::sun, "Affichage", Apps::SettingDisplay},
+    {Symbols::eye, "Reveille", Apps::SettingWakeUp},
+    {Symbols::clock, "Format de l'hrs", Apps::SettingTimeFormat},
+    {Symbols::home, "Cadran", Apps::SettingWatchFace},
   }};
 
   return std::make_unique<Screens::List>(0, 3, app, settingsController, applications);
@@ -48,10 +48,10 @@ std::unique_ptr<Screen> Settings::CreateScreen1() {
 std::unique_ptr<Screen> Settings::CreateScreen2() {
 
   std::array<Screens::List::Applications, 4> applications {{
-    {Symbols::shoe, "Steps", Apps::SettingSteps},
-    {Symbols::clock, "Set date", Apps::SettingSetDate},
-    {Symbols::clock, "Set time", Apps::SettingSetTime},
-    {Symbols::batteryHalf, "Battery", Apps::BatteryInfo}
+    {Symbols::shoe, "Pas", Apps::SettingSteps},
+    {Symbols::clock, "Editer la date", Apps::SettingSetDate},
+    {Symbols::clock, "Editer l'heure", Apps::SettingSetTime},
+    {Symbols::batteryHalf, "Batterie", Apps::BatteryInfo}
   }};
 
   return std::make_unique<Screens::List>(1, 3, app, settingsController, applications);
@@ -60,7 +60,7 @@ std::unique_ptr<Screen> Settings::CreateScreen2() {
 std::unique_ptr<Screen> Settings::CreateScreen3() {
 
   std::array<Screens::List::Applications, 4> applications {{
-    {Symbols::paintbrush, "PTS Colors", Apps::SettingPineTimeStyle},
+    {Symbols::paintbrush, "PTS Couleurs", Apps::SettingPineTimeStyle},
     {Symbols::check, "Firmware", Apps::FirmwareValidation},
     {Symbols::list, "About", Apps::SysInfo},
     {Symbols::none, "None", Apps::None},
